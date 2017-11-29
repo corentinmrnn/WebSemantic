@@ -2,33 +2,36 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX dbp: <http://dbpedia.org/property/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX georss: <http://www.georss.org/georss>
-PREFIX frapo <http://purl.org/cerif/frapo/>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX pext: <http://www.ontotext.com/proton/protonext#>
 
 CONSTRUCT {
-		_:primes a frapo:ResearchGroup;
-			dbp:workInstitution ?URI_Inst;
-    	dbp:year ?an;
-      foaf:gender ?sexe;
-      ?pBeneficiaires ?benef;
-      ?pField ?URI_Field;
-      ?pProfGroup ?URI_ProfGroup;
+		_:primes a frapo:Funding;
+    	frapo:hasAwardDate ?an;
+			frapo:funds _:researchGroup;
       frapo:hasFundingAgency ?URI_IDEX.
+
+		_:researchGroup a frapo:ResearchGroup;
+			dbp:workInstitution ?URI_Inst;
+			foaf:gender ?sexe;
+			frapo:hasHeadcount ?benef;
+      frapo:hasExpertise ?URI_Area;
+      frapo:hasJobTitle ?URI_ProfGroup.
 
     ?URI_Inst a dbo:EducationalInstitution;
 	   foaf:name ?etablissement;
      frapo:hasCode ?code_uai;
-     ?pAcademy ?URI_Academy;
-     ?pPRES ?URI_PRES;
-     ?pRegion ?URI_Region;
+     dbo:isPartOf ?URI_Academy;
+     dbo:affiliation ?URI_PRES;
+     dbo:location ?URI_Region;
      georss:point ?geolocalisation.
 
-    ?URI_Field a skos:Concept;
+    ?URI_Area a pext:ResearchArea;
       foaf:name ?secteur_disciplinaire;
       frapo:hasCode ?cnu.
 
-    ?URI_ProfGroup a ?tProfessionGroup;
+    ?URI_ProfGroup a dbo:Profession;
       foaf:name ?groupe_de_corps;
       frapo:hasCode ?cgc.
 
@@ -36,11 +39,11 @@ CONSTRUCT {
       foaf:name ?IDEX;
       frapo:hasCode ?codeIDEX.
 
-    ?URIAcademy a ?tAcademy;
+    ?URIAcademy a dbo:EducationalInstitution;
       foaf:name ?academie;
       frapo:hasCode ?codeAca.
 
-    ?URI_PRES a ?tPRES;
+    ?URI_PRES a frapo:ResearchInstitute;
       foaf:name ?PRES;
       frapo:hasCode ?codePRES.
 
@@ -53,7 +56,7 @@ FROM <file>
 WHERE {
 
 	BIND (URI(CONCAT('institution/', ?code_uai)) AS ?URI_Inst)
-  BIND (URI(CONCAT('field/', ?code_secteur_cnu)) AS ?URI_Field)
+  BIND (URI(CONCAT('area/', ?code_secteur_cnu)) AS ?URI_Area)
   BIND (URI(CONCAT('profGroup/', ?code_groupe_corps)) AS ?URI_ProfGroup)
   BIND (URI(CONCAT('idex/', ?code_idex)) AS ?URI_IDEX)
   BIND (URI(CONCAT('academy/', ?code_academie)) AS ?URI_Academy)
@@ -61,16 +64,6 @@ WHERE {
   BIND (URI(CONCAT('region/', ?code_region)) AS ?URI_Region)
 
   BIND (URI('type/ProfessionGroup') AS ?tProfessionGroup)
-  BIND (URI('type/IDEX') AS ?tIDEX)
-  BIND (URI('type/Academy') AS ?tAcademy)
-  BIND (URI('type/PRES') AS ?tPRES)
-
-  BIND (URI('predicate/field') AS ?pField)
-  BIND (URI('predicate/professionGroup') AS ?pProfGroup)
-  BIND (URI('predicate/academy') AS ?pAcademy)
-  BIND (URI('predicate/PRES') AS ?pPRES)
-  BIND (URI('predicate/region') AS ?pRegion)
-  BIND (URI('predicate/beneficiaires') AS ?pBeneficiaires)
 
   BIND (xsd:integer(?beneficiaires) AS ?benef)
   BIND (xsd:integer(?annee) AS ?an)
