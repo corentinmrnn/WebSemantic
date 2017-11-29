@@ -4,19 +4,21 @@ PREFIX dbp: <http://dbpedia.org/property/>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX georss: <http://www.georss.org/georss>
+PREFIX frapo <http://purl.org/cerif/frapo/>
 
 CONSTRUCT {
-		_:primes ?pInstitution ?URI_Inst;
+		_:primes a frapo:ResearchGroup;
+			dbp:workInstitution ?URI_Inst;
     	dbp:year ?an;
       foaf:gender ?sexe;
       ?pBeneficiaires ?benef;
       ?pField ?URI_Field;
       ?pProfGroup ?URI_ProfGroup;
-      ?pIDEX ?URI_IDEX.
+      frapo:hasFundingAgency ?URI_IDEX.
 
     ?URI_Inst a dbo:EducationalInstitution;
 	   foaf:name ?etablissement;
-     ?pInstCode ?code_uai;
+     frapo:hasCode ?code_uai;
      ?pAcademy ?URI_Academy;
      ?pPRES ?URI_PRES;
      ?pRegion ?URI_Region;
@@ -24,27 +26,27 @@ CONSTRUCT {
 
     ?URI_Field a skos:Concept;
       foaf:name ?secteur_disciplinaire;
-      ?pFieldCode ?cnu.
+      frapo:hasCode ?cnu.
 
     ?URI_ProfGroup a ?tProfessionGroup;
       foaf:name ?groupe_de_corps;
-      ?pProfGroupCode ?cgc.
+      frapo:hasCode ?cgc.
 
-    ?URI_IDEX a ?tIDEX;
+    ?URI_IDEX a frapo:FundingAgency;
       foaf:name ?IDEX;
-      ?pIdexCode ?codeIDEX.
+      frapo:hasCode ?codeIDEX.
 
     ?URIAcademy a ?tAcademy;
       foaf:name ?academie;
-      ?pAcademyCode ?codeAca.
+      frapo:hasCode ?codeAca.
 
     ?URI_PRES a ?tPRES;
       foaf:name ?PRES;
-      ?pPresCode ?codePRES.
+      frapo:hasCode ?codePRES.
 
     ?URI_Region a dbo:Region;
       foaf:name ?region;
-      ?pRegionCode ?codeReg.
+      frapo:hasCode ?codeReg.
 
 }
 FROM <file>
@@ -63,21 +65,12 @@ WHERE {
   BIND (URI('type/Academy') AS ?tAcademy)
   BIND (URI('type/PRES') AS ?tPRES)
 
-  BIND (URI('predicate/institution') AS ?pInstitution)
   BIND (URI('predicate/field') AS ?pField)
   BIND (URI('predicate/professionGroup') AS ?pProfGroup)
-  BIND (URI('predicate/IDEX') AS ?pIDEX)
   BIND (URI('predicate/academy') AS ?pAcademy)
   BIND (URI('predicate/PRES') AS ?pPRES)
   BIND (URI('predicate/region') AS ?pRegion)
   BIND (URI('predicate/beneficiaires') AS ?pBeneficiaires)
-  BIND (URI('predicate/instCode') AS ?pInstCode)
-  BIND (URI('predicate/fieldCode') AS ?pFieldCode)
-  BIND (URI('predicate/profGroupCode') AS ?pProfGroupCode)
-  BIND (URI('predicate/idexCode') AS ?pIdexCode)
-  BIND (URI('predicate/academyCode') AS ?pAcademyCode)
-  BIND (URI('predicate/presCode') AS ?pPresCode)
-  BIND (URI('predicate/regionCode') AS ?pRegionCode)
 
   BIND (xsd:integer(?beneficiaires) AS ?benef)
   BIND (xsd:integer(?annee) AS ?an)
