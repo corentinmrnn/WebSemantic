@@ -7,7 +7,7 @@ PREFIX georss: <http://www.georss.org/georss>
 
 CONSTRUCT {
 		_:primes ?pInstitution ?URI_Inst;
-    	?pYear ?an;
+    	dbp:year ?an;
       foaf:gender ?sexe;
       ?pBeneficiaires ?benef;
       ?pField ?URI_Field;
@@ -67,7 +67,6 @@ WHERE {
   BIND (URI('predicate/field') AS ?pField)
   BIND (URI('predicate/professionGroup') AS ?pProfGroup)
   BIND (URI('predicate/IDEX') AS ?pIDEX)
-  BIND (URI('predicate/year') AS ?pYear)
   BIND (URI('predicate/academy') AS ?pAcademy)
   BIND (URI('predicate/PRES') AS ?pPRES)
   BIND (URI('predicate/region') AS ?pRegion)
