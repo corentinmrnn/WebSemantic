@@ -1,11 +1,12 @@
-prefix p: <upload-base/predicate/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-select (?y as ?Year) (?f as ?Field) (count(?p) as ?Primes)
+select (STR(?y) as ?Year) (?areaName as ?Area) (STR(count(?p)) as ?Primes)
 where {
-?p p:year ?y.
-?p p:field ?fi.
-?fi foaf:name ?f.
+  ?prime frapo:hasAwardDate ?y.
+  ?prime frapo:funds ?group.
+  ?group frapo:hasExpertise ?ar.
+  ?ar foaf:name ?areaName.
 }
-group by ?y ?f
-order by ?y ?f
+group by ?y ?areaName
+order by ?y ?areaName

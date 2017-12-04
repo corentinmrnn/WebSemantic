@@ -1,11 +1,13 @@
-prefix p: <upload-base/predicate/>
-prefix foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT (?y as ?Annee) (?g as ?Gender) (count(?nb) as ?Beneficiaires)
+SELECT (STR(?y) as ?Annee) (?g as ?Gender) (STR(count(?nb)) as ?Beneficiaires)
 WHERE {
-?p p:year ?y.
-?p p:beneficiaires ?nb.
-?p foaf:gender ?g
+  ?prime frapo:hasAwardDate ?y.
+  ?prime frapo:funds ?group.
+  ?group foaf:gender ?g.
+  ?group frapo:hasHeadcount ?nb.
 }
 group by ?y ?g
 order by ?y ?g
