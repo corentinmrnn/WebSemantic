@@ -6,6 +6,8 @@ PREFIX georss: <http://www.georss.org/georss>
 PREFIX frapo: <http://purl.org/cerif/frapo/>
 PREFIX pext: <http://www.ontotext.com/proton/protonext#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 frapo:Funding rdf:type owl:Class ;
                            rdfs:subClassOf frapo:FinancialEntity .
@@ -19,7 +21,7 @@ dbo:EducationalInstitution rdf:type owl:Class ;
 pext:ResearchArea rdf:type owl:Class ;
                            rdfs:subClassOf pext:SocialAbstraction .
 
-pext:Profession rdf:type owl:Class .
+pext:Profession rdf:type owl:Class ;
                            rdfs:subClassOf pext:SocialFunction .
 
 frapo:FundingAgency rdf:type owl:Class ;
