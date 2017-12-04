@@ -31,7 +31,7 @@ CONSTRUCT {
       foaf:name ?secteur_disciplinaire;
       frapo:hasCode ?cnu.
 
-    ?URI_ProfGroup a dbo:Profession;
+    ?URI_ProfGroup a pext:Profession;
       foaf:name ?groupe_de_corps;
       frapo:hasCode ?cgc.
 
@@ -62,8 +62,6 @@ WHERE {
   BIND (URI(CONCAT('academy/', ?code_academie)) AS ?URI_Academy)
   BIND (URI(CONCAT('pres/', ?code_pres)) AS ?URI_PRES)
   BIND (URI(CONCAT('region/', ?code_region)) AS ?URI_Region)
-
-  BIND (URI('type/ProfessionGroup') AS ?tProfessionGroup)
 
   BIND (xsd:integer(?beneficiaires) AS ?benef)
   BIND (xsd:integer(?annee) AS ?an)
