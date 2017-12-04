@@ -1004,16 +1004,3 @@ dbo:Place owl:equivalentClass dbo:Location .
 dbo:Place rdf:type rdfs:Class .
 dbo:Place rdf:type rdfs:Resource .
 dbo:Place rdf:type owl:Class .
-
-:InFem a void:Dataset;
-    dcterms:title "InFem";
-    dcterms:description "RDF data from data.enseignementsup-recherche.gouv.fr about the initiatives against sexual and sexist violence in the French educational establishments.";
-    dcterms:contributor :Halaskaf;
-    dcterms:publisher :Gozurn;
-:Halaskaf a foaf:Person.
-:Gozurn a foaf:Person;
-    rdfs:label "idunno";
-    foaf:mbox <zurn13@hotmail.fr>.
-    dcterms:source <https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-initiatives-pour-la-lutte-contre-les-violences-sexistes-et-sexuelles/table/?disjunctive.zone_geographique&sort=academie>;
-    dcterms:modified "2017-12-1"^^xsd:date .
-    dcterms:subject <http://dbpedia.org/resource/Sexism>.
