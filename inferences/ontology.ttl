@@ -1,0 +1,76 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX georss: <http://www.georss.org/georss>
+PREFIX frapo: <http://purl.org/cerif/frapo/>
+PREFIX pext: <http://www.ontotext.com/proton/protonext#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+frapo:Funding rdf:type owl:Class ;
+                           rdfs:subClassOf frapo:FinancialEntity .
+
+frapo:ResearchGroup rdf:type owl:Class ;
+                           rdfs:subClassOf foaf:Group .
+
+dbo:EducationalInstitution rdf:type owl:Class ;
+                          rdfs:subClassOf dbo:Organisation .
+
+pext:ResearchArea rdf:type owl:Class ;
+                           rdfs:subClassOf pext:SocialAbstraction .
+
+pext:Profession rdf:type owl:Class .
+                           rdfs:subClassOf pext:SocialFunction .
+
+frapo:FundingAgency rdf:type owl:Class ;
+                           rdfs:subClassOf foaf:Organization .
+
+frapo:ResearchInstitute rdf:type owl:Class ;
+                          rdfs:subClassOf foaf:Organization .
+
+dbo:Region rdf:type owl:Class ;
+                          rdfs:subClassOf dbo:PopulatedPlace .
+
+frapo:hasAwardDate rdf:type rdf:Property ;
+            rdfs:domain frapo:Funding .
+
+frapo:funds rdf:type rdf:Property ;
+            rdfs:domain frapo:Funding ;
+            rdfs:range frapo:ResearchGroup.
+
+frapo:hasFundingAgency rdf:type rdf:Property ;
+            rdfs:domain frapo:Funding ;
+            rdfs:range frapo:FundingAgency.
+
+dbp:workInstitution rdf:type rdf:Property ;
+            rdfs:domain frapo:ResearchGroup ;
+            rdfs:range dbo:EducationalInstitution.
+
+foaf:gender rdf:type rdf:Property ;
+            rdfs:domain frapo:ResearchGroup .
+
+frapo:hasHeadcount rdf:type rdf:Property ;
+            rdfs:domain frapo:ResearchGroup .
+
+frapo:hasExpertise rdf:type rdf:Property ;
+            rdfs:domain frapo:ResearchGroup ;
+            rdfs:range pext:ResearchArea .
+
+frapo:hasJobTitle rdf:type rdf:Property ;
+            rdfs:domain frapo:ResearchGroup ;
+            rdfs:range pext:Profession .
+
+dbo:isPartOf rdf:type rdf:Property ;
+            rdfs:domain dbo:EducationalInstitution ;
+            rdfs:range dbo:EducationalInstitution .
+
+dbo:affiliation rdf:type rdf:Property ;
+            rdfs:domain dbo:EducationalInstitution ;
+            rdfs:range frapo:ResearchInstitute .
+
+dbo:location rdf:type rdf:Property ;
+            rdfs:domain dbo:EducationalInstitution ;
+            rdfs:range dbo:Region .
+
+georss:point rdf:type rdf:Property ;
+            rdfs:domain dbo:EducationalInstitution .
