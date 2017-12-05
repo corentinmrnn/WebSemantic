@@ -1,0 +1,31 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX void: <http://rdfs.org/ns/void#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+
+INSERT DATA {
+	_:WebSemDataset a void:Dataset;
+		void:feature <http://www.w3.org/ns/formats/Turtle>;
+		void:triples ?nbTriples;
+		void:classes ?nbClasses;
+		void:properties  ?nbProps;
+		dcterms:source <https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-pes-pedr-beneficiaires/>;
+		dc:title "Bénéficiaires de la prime d'excellence scientifique";
+		dc:description "Graphe rdf en format Turtle généré depuis le dataset csv sur les primes d'excellence scientifique fourni par l'ESR";
+		dc:creator _:MerlinBarzilai;
+		dc:creator _:CorentinMarionneau.
+
+	_:MerlinBarzilai a foaf:Person;
+		foaf:name "Merlin Barzilai";
+		foaf:mbox "merlin.barzilai@etu.univ-nantes.fr".
+
+	_:CorentinMarionneau a foaf:Person;
+		foaf:name "Corentin Marionneau";
+		foaf:mbox "corentin.marionneau@etu.univ-nantes.fr".
+}
+WHERE
+{
+	BIND (xsd:integer(13000) AS ?nbTriples)
+	BIND (xsd:integer(8) AS ?nbClasses)
+	BIND (xsd:integer(15) AS ?nbProps)
+}
