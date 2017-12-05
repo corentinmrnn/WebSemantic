@@ -1,5 +1,5 @@
 # Semantic Web Project
-### Merlin BARZILAI & Corentin MARIONNEAU
+## Merlin BARZILAI & Corentin MARIONNEAU
 This is the repository of the Semantic Web project where we converted a dataset listing the research projects awarded with the scientific excellence bonus in France to 5-star open data.
 
 In this repository you can find everything we used to generate our RDF graph from the following CSV file : [Initial dataset](https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-pes-pedr-beneficiaires/)
