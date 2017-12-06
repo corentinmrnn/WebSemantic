@@ -27,6 +27,8 @@ You can find in `/inferences` sevaral files used to generate RDFS inferences on 
 You can find in `/queries` 2 different queries we designed for our graph :
 * `query1.sparql` : a query which selects the number of people awarded of each gender for each year
 * `query2.sparql` : a query which selects the number of bonus receiving groups for each area of research for each year
+* `multigraph_query.sparql` : a query using data from both our graph and our pair group's graph
+* `MultigraphQuery.java` : the java file used to create a dataset with both the graphs and execute the query
 
 ## RDF
 
