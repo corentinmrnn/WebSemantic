@@ -1,0 +1,37 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX swpo: <http://sw-portal.deri.org/ontologies/swportal#>
+PREFIX dbo:  <http://dbpedia.org/ontology/>
+PREFIX dbf: <http://fr.dbpedia.org/resource/>
+PREFIX dbp:  <http://dbpedia.org/property/>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX frapo:  <http://purl.org/cerif/frapo/>
+
+SELECT ?Institution (?g as ?Gender) (count(?nb) as ?Beneficiaires)
+WHERE {
+GRAPH ?graph{
+  ?prime frapo:funds ?group.
+
+  ?group foaf:gender ?g;
+          dbp:workInstitution ?instURI;
+          frapo:hasHeadcount ?nb.
+
+  ?instURI foaf:name ?Institution.
+
+  {
+    SELECT DISTINCT ?Institution
+    WHERE
+    {
+      GRAPH ?graph {
+        ?event rdf:type dbo:Event;
+                swpo:hasLocation ?instResource.
+
+        ?instResource rdf:type dbo:EducationalInstitution;
+                foaf:name ?Institution.
+                      }
+
+    }
+  }
+}
+}
+group by ?Institution ?g
+order by ?Institution ?g
