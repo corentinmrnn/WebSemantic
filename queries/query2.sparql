@@ -1,7 +1,7 @@
 PREFIX frapo: <http://purl.org/cerif/frapo/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-select (STR(?y) as ?Year) (?areaName as ?Area) (STR(count(?p)) as ?Primes)
+select (STR(?y) as ?Year) (?areaName as ?Area) (count(?prime) as ?Primes)
 where {
   ?prime frapo:hasAwardDate ?y.
   ?prime frapo:funds ?group.
